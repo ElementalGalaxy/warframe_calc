@@ -183,7 +183,7 @@
             status_chance = (status_chance/100) * (1+ status_chance_mods)
 
 
-            let effective_firerate = magazine_size/(charge_rate+(1/fire_rate));
+            let effective_firerate = 1/(charge_rate+(1/fire_rate));
 
             let total = (slash_damage + puncture_damage + impact_damage + aoe_damage + elemental_damage) * (1+base_damage_mods) * (1+elemental_mods) * (1+faction_mods);
             let average_total = total * multishot * (1+crit_chance*(crit_damage-1));
