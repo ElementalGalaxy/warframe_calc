@@ -94,8 +94,9 @@
         <label>Final Status Chance</label>
         <label><span id="final_status_chance"></span></label>
 
-        <label></label>
-        <label></label>
+        <label for="beam_weapon_checkbox">Continious/Beam Weapon?</label>
+            <input type="checkbox" id="beam_weapon_checkbox"  onclick=calculateNums()>
+
         <label></label>
         <label></label>
         <label></label>
@@ -159,6 +160,7 @@
             let crit_damage = Number(document.getElementById('weapon_crit_damage').value);
             let multishot = Number(document.getElementById('weapon_multishot').value);
             let status_chance = Number(document.getElementById('weapon_status_chance').value);
+            
 
 
             const base_damage_mods = (Number(document.getElementById('base_damage_bonus').value))/100;
@@ -185,10 +187,18 @@
 
             let effective_firerate = 1/(charge_rate+(1/fire_rate));
 
-            let total = (slash_damage + puncture_damage + impact_damage + aoe_damage + elemental_damage) * (1+base_damage_mods) * (1+elemental_mods) * (1+faction_mods);
-            let average_total = total * multishot * (1+crit_chance*(crit_damage-1));
+            let total = (slash_damage + puncture_damage + impact_damage + aoe_damage + elemental_damage) * (1+base_damage_mods) * (1+elemental_mods) * (1+faction_mods) * multishot;
+            let average_total = total * (1+crit_chance*(crit_damage-1));
             let burst_dps_total = average_total * effective_firerate;
-            let sustained_dps_total = burst_dps_total * (magazine_size/((effective_firerate*reload_speed)+magazine_size));
+            
+            let beam_weapon = document.getElementById('beam_weapon_checkbox');
+            if (beam_weapon.checked) {
+                sustained_dps_total = burst_dps_total * ((magazine_size*2)/(effective_firerate*reload_speed+(magazine_size*2)));
+            }
+            else {
+                sustained_dps_total = burst_dps_total * (magazine_size/(effective_firerate*reload_speed+magazine_size));
+            }
+            
 
 
             const final_crit_chance = document.getElementById('final_crit_chance');
