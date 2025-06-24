@@ -188,7 +188,7 @@
             let total = (slash_damage + puncture_damage + impact_damage + aoe_damage + elemental_damage) * (1+base_damage_mods) * (1+elemental_mods) * (1+faction_mods);
             let average_total = total * multishot * (1+crit_chance*(crit_damage-1));
             let burst_dps_total = average_total * effective_firerate;
-            let sustained_dps_total = burst_dps_total * (magazine_size/(effective_firerate*reload_speed+magazine_size));
+            let sustained_dps_total = burst_dps_total * (magazine_size/((effective_firerate*reload_speed)+magazine_size));
 
 
             const final_crit_chance = document.getElementById('final_crit_chance');
