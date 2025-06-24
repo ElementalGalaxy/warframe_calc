@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple HTML Page</title>
+    <title>Warframe Damage Calculator</title>
     <style>
         #calc_containers { /* Using your new ID name */
             
@@ -173,14 +173,14 @@
             const reload_mods = (Number(document.getElementById('reload_speed_bonus').value))/100;
             const status_chance_mods = (Number(document.getElementById('status_chance_bonus').value))/100;
 
-            crit_chance = (crit_chance /100) * (1+crit_chance_mods)
+            crit_chance = ((crit_chance /100) * (1+crit_chance_mods)).toFixed(2)
             crit_damage = crit_damage * (1+crit_damage_mods)
             multishot = multishot * (1+multishot_mods)
             fire_rate = fire_rate * (1+ firerate_mods)
             magazine_size = magazine_size * (1+magazine_mods)
             charge_rate = charge_rate/ (1+firerate_mods)
             reload_speed = reload_speed / (1+reload_mods)
-            status_chance = (status_chance/100) * (1+ status_chance_mods)
+            status_chance = ((status_chance/100) * (1+ status_chance_mods)).toFixed(2)
 
 
             let effective_firerate = magazine_size/(charge_rate+(1/fire_rate));
@@ -192,7 +192,7 @@
 
 
             const final_crit_chance = document.getElementById('final_crit_chance');
-                final_crit_chance.textContent = crit_chance.toFixed(2) * 100 + '%';
+                final_crit_chance.textContent = crit_chance * 100 + '%';
             const final_crit_damage = document.getElementById('final_crit_damage');
                 final_crit_damage.textContent = crit_damage.toFixed(2);
             const final_multishot = document.getElementById('final_multishot');
@@ -206,7 +206,7 @@
             const final_charge_rate = document.getElementById('final_charge_rate');
                 final_charge_rate.textContent = charge_rate.toFixed(2)
             const final_status_chance = document.getElementById('final_status_chance');
-                final_status_chance.textContent = status_chance.toFixed(2) * 100 + '%';
+                final_status_chance.textContent = status_chance * 100 + '%';
 
 
             const base_Damage_OutputSpan = document.getElementById('base_damage_output');
