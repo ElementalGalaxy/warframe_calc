@@ -192,7 +192,7 @@
 
 
             const final_crit_chance = document.getElementById('final_crit_chance');
-                final_crit_chance.textContent = crit_chance * 100 + '%';
+                final_crit_chance.textContent = crit_chance.toFixed(2) * 100 + '%';
             const final_crit_damage = document.getElementById('final_crit_damage');
                 final_crit_damage.textContent = crit_damage.toFixed(2);
             const final_multishot = document.getElementById('final_multishot');
