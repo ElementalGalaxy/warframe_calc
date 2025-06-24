@@ -76,36 +76,36 @@
         // Your JavaScript code will go here
         function calculateNums() 
         {   
-            const impact_damage = Number(index.getElementById('impact_damage').value);
-            const puncture_damage = Number(index.getElementById('puncture_damage').value);
-            const slash_damage = Number(index.getElementById('slash_damage').value);
+            const impact_damage = Number(document.getElementById('impact_damage').value);
+            const puncture_damage = Number(document.getElementById('puncture_damage').value);
+            const slash_damage = Number(document.getElementById('slash_damage').value);
 
-            const base_Damage_OutputSpan = index.getElementById('base_damage_output');
+            const base_Damage_OutputSpan = document.getElementById('base_damage_output');
             const total = slash_damage + puncture_damage + impact_damage;
             base_Damage_OutputSpan.textContent = total;
 
-            let crit_chance = Number(index.getElementById('weapon_crit_chance').value);
+            let crit_chance = Number(document.getElementById('weapon_crit_chance').value);
             crit_chance = crit_chance/100;
-            const crit_damage = Number(index.getElementById('weapon_crit_damage').value);
-            const multishot = Number(index.getElementById('weapon_multishot').value);
+            const crit_damage = Number(document.getElementById('weapon_crit_damage').value);
+            const multishot = Number(document.getElementById('weapon_multishot').value);
         
-            const average_Damage_OutputSpan = index.getElementById('average_damage_output');
+            const average_Damage_OutputSpan = document.getElementById('average_damage_output');
             const average_total = total * multishot * (1+crit_chance*(crit_damage-1));
             average_Damage_OutputSpan.textContent = average_total;
 
 
-            const fire_rate = Number(index.getElementById('weapon_firerate').value);
-            const charge_rate = Number(index.getElementById('weapon_charge_time').value);
-            const magazine_size = Number(index.getElementById('weapon_magsize').value);
-            const reload_speed = Number(index.getElementById('weapon_reload_speed').value);
+            const fire_rate = Number(document.getElementById('weapon_firerate').value);
+            const charge_rate = Number(document.getElementById('weapon_charge_time').value);
+            const magazine_size = Number(document.getElementById('weapon_magsize').value);
+            const reload_speed = Number(document.getElementById('weapon_reload_speed').value);
 
             let effective_firerate = magazine_size/(charge_rate+(1/fire_rate));
 
-            const burst_dps_output = index.getElementById('burst_output');
+            const burst_dps_output = document.getElementById('burst_output');
             const burst_dps_total = average_total * effective_firerate;
             burst_dps_output.textContent = burst_dps_total;
             
-            const sustained_dps_output = index.getElementById('sustained_output');
+            const sustained_dps_output = document.getElementById('sustained_output');
             const sustained_dps_total = burst_dps_total * (magazine_size/(effective_firerate*reload_speed+magazine_size));
             sustained_dps_output.textContent = sustained_dps_total;
 
