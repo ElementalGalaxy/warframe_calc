@@ -4,10 +4,114 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simple HTML Page</title>
+    <style>
+        #calc_containers { /* Using your new ID name */
+            
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 10px 15px;
+        }
+        #calc_containers label {
+        
+        min-width: 100px; 
+        text-align: left; 
+    }
+        #calc_containers input[type="number"]{
+        
+        width: 50px; 
+        text-align: right;
+    }
+    </style>
 </head>
 <body>
-    <h1>Welcome to My Page</h1>
-    <p>This is a simple HTML page.</p>
-    <a href="https://www.warframe.com">Warframe.com</a>
+    <h1>Warframe Damage Calculator</h1>
+
+
+    <div id="calc_containers">
+    
+        <label for="weapon_crit_chance">Enter the weapon's critical chance</label>
+        <input type="number" id="weapon_crit_chance"oninput=calculateNums()>
+
+        <label for="weapon_crit_damage">Enter the weapon's critical multiplier/damage</label>
+        <input type="number" id="weapon_crit_damage"oninput=calculateNums()>
+
+        <label for="weapon_firerate">Enter the weapon's fire rate</label>
+        <input type="number" id="weapon_firerate" oninput=calculateNums()>
+ 
+        <label for="weapon_magsize">Enter the weapon's magazine size</label>
+        <input type="number" id="weapon_magsize" oninput=calculateNums()>
+   
+        <label for="weapon_multishot">Enter the weapon's base multishot</label>
+        <input type="number" id="weapon_multishot"oninput=calculateNums()>
+
+        <label for="weapon_reload_speed">Enter the weapon's reload speed</label>
+        <input type="number" id="weapon_reload_speed" oninput=calculateNums()>
+ 
+        <label for="weapon_charge_time">Enter the weapon's charge time (if it has one)</label>
+        <input type="number" id="weapon_charge_time"oninput=calculateNums()>
+  
+        <label for="weapon_status_chance">Enter the weapon's status chance</label>
+        <input type="number" id="weapon_status_chance"oninput=calculateNums()>
+ 
+
+   
+        <label for="impact_damage">Enter Impact Damage:</label>
+        <input type="number" id="impact_damage"oninput="calculateNums()">
+    
+
+        <label for="puncture_damage">Enter Puncture Damage:</label>
+        <input type="number" id="puncture_damage"oninput="calculateNums()">
+
+        <label for="slash_damage">Enter Slash Damage:</label>
+        <input type="number" id="slash_damage"oninput="calculateNums()">
+
+    </div>
+    <p>Base Damage: <span id="base_damage_output"></span></p>
+    <p>Average Hit: <span id="average_damage_output"></span></p>
+    <p>Burst DPS: <span id="burst_output"></span></p>
+    <p>Sustained DPS: <span id="sustained_output"></span></p>
+
+
+    <script>
+        // Your JavaScript code will go here
+        function calculateNums() 
+        {   
+            const impact_damage = Number(index.getElementById('impact_damage').value);
+            const puncture_damage = Number(index.getElementById('puncture_damage').value);
+            const slash_damage = Number(index.getElementById('slash_damage').value);
+
+            const base_Damage_OutputSpan = index.getElementById('base_damage_output');
+            const total = slash_damage + puncture_damage + impact_damage;
+            base_Damage_OutputSpan.textContent = total;
+
+            let crit_chance = Number(index.getElementById('weapon_crit_chance').value);
+            crit_chance = crit_chance/100;
+            const crit_damage = Number(index.getElementById('weapon_crit_damage').value);
+            const multishot = Number(index.getElementById('weapon_multishot').value);
+        
+            const average_Damage_OutputSpan = index.getElementById('average_damage_output');
+            const average_total = total * multishot * (1+crit_chance*(crit_damage-1));
+            average_Damage_OutputSpan.textContent = average_total;
+
+
+            const fire_rate = Number(index.getElementById('weapon_firerate').value);
+            const charge_rate = Number(index.getElementById('weapon_charge_time').value);
+            const magazine_size = Number(index.getElementById('weapon_magsize').value);
+            const reload_speed = Number(index.getElementById('weapon_reload_speed').value);
+
+            let effective_firerate = magazine_size/(charge_rate+(1/fire_rate));
+
+            const burst_dps_output = index.getElementById('burst_output');
+            const burst_dps_total = average_total * effective_firerate;
+            burst_dps_output.textContent = burst_dps_total;
+            
+            const sustained_dps_output = index.getElementById('sustained_output');
+            const sustained_dps_total = burst_dps_total * (magazine_size/(effective_firerate*reload_speed+magazine_size));
+            sustained_dps_output.textContent = sustained_dps_total;
+
+
+
+        }
+    </script>
 </body>
 </html>
