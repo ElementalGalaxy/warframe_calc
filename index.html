@@ -121,17 +121,20 @@
             let multishot = stats.weapon_multishot;
             let status_chance = stats.weapon_status_chance;
             
-            const base_damage_mods = stats.base_damage_bonus/100;
-            const direct_damage_bonus = stats.direct_damage_bonus/100;
-            const elemental_mods = stats.elemental_bonus/100;
-            const faction_mods = stats.faction_bonus/100;
-            const crit_chance_mods = stats.crit_chance_bonus/100;
-            const crit_damage_mods = stats.crit_damage_bonus/100;
-            const multishot_mods = stats.multishot_bonus/100;
-            const firerate_mods = stats.firerate_bonus/100;
-            const magazine_mods = stats.magsize_bonus/100;
-            const reload_mods = stats.reload_speed_bonus/100;
-            const status_chance_mods = stats.status_chance_bonus/100;
+            let base_damage_mods = stats.base_damage_bonus/100;
+            let direct_damage_bonus = stats.direct_damage_bonus/100;
+            let elemental_mods = stats.elemental_bonus/100;
+            console.log(elemental_mods)
+            let faction_mods = stats.faction_bonus/100;
+            console.log(faction_mods)
+            let crit_chance_mods = stats.crit_chance_bonus/100;
+            let crit_damage_mods = stats.crit_damage_bonus/100;
+            let multishot_mods = stats.multishot_bonus/100;
+            console.log(multishot_mods)
+            let firerate_mods = stats.firerate_bonus/100;
+            let magazine_mods = stats.magsize_bonus/100;
+            let reload_mods = stats.reload_speed_bonus/100;
+            let status_chance_mods = stats.status_chance_bonus/100;
 
             crit_chance = (crit_chance /100) * (1+crit_chance_mods)
             crit_damage = crit_damage * (1+crit_damage_mods)
@@ -144,11 +147,13 @@
 
             let effective_firerate = 1/(charge_rate+(1/fire_rate));
             let GunCO_checkbox = document.getElementById('Gun/CO_checkbox');
+            let base_total = 0;
+
             if (GunCO_checkbox.checked) {
                 base_total = (((slash_damage + puncture_damage + impact_damage + elemental_damage)*(1+direct_damage_bonus))+aoe_damage) * (1+base_damage_mods) * (1+elemental_mods) * (1+faction_mods) * multishot;
             }
             else {
-                base_total = ((slash_damage + puncture_damage + impact_damage + elemental_damage)*(1+direct_damage_bonus+base_damage_mods))+(aoe_damage*(1+base_damage_mods)) * (1+elemental_mods) * (1+faction_mods) * multishot;
+                base_total = (((slash_damage + puncture_damage + impact_damage + elemental_damage) * (1+base_damage_mods+direct_damage_bonus)) + (aoe_damage * (1+base_damage_mods)))  * (1+elemental_mods) * (1+faction_mods) * multishot;
             }
 
             
