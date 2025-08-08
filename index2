@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Warframe Damage Calculator</title>
+    <link rel="stylesheet" href='style.css'>
+</head>
+<body>
+    <h1>Warframe Damage Calculator</h1>
+    <div id="calc_containers">
+        <label><strong> Weapon's Base Stats</strong></label>
+        <label><strong>Enter mod bonuses in %</strong></label>
+        <label><strong>Final Stats</strong></label>
+
+        
+        <label>Critical Chance<input type="number" id="weapon_crit_chance" placeholder="%" style="text-align: right;"></label>
+        <label>Critical Chance Bonus<input type="number" id="crit_chance_bonus" placeholder="%" style="text-align: right;"></label>
+        <label>Final Critical Chance<span id="final_crit_chance"></span></label>
+
+        
+
+        
+            
+        <label>Critical Multiplier/Damage<input type="number" id="weapon_crit_damage"></label>   
+        <label>Critical Damage Bonus<input type="number" id="crit_damage_bonus" placeholder="%" style="text-align: right;"></label>
+        <label>Final Critical Multiplier<span id="final_crit_damage"></span></label>
+
+        
+
+        
+            
+        <label>Fire Rate<input type="number" id="weapon_firerate"></label>  
+        <label>Fire Rate Bonus<input type="number" id="firerate_bonus" placeholder="%" style="text-align: right;"></label>
+        <label>Final Fire Rate<span id="final_firerate"></span></label>
+
+        
+
+        
+            
+        <label>Magazine Size<input type="number" id="weapon_magsize"></label>   
+        <label>Magazine Bonus<input type="number" id="magsize_bonus" placeholder="%" style="text-align: right;"></label>
+        <label>Final Magazine Size<span id="final_magsize"></span></label>
+
+        
+
+        
+
+        <label>Multishot<input type="number" id="weapon_multishot"></label>   
+        <label>Multishot Bonus<input type="number" id="multishot_bonus" placeholder="%" style="text-align: right;"></label>
+        <label>Final Multishot<span id="final_multishot"></span></label>
+
+        
+
+        
+            
+        <label>Reload Speed<input type="number" id="weapon_reload_speed"></label>   
+        <label>Reload Bonus<input type="number" id="reload_speed_bonus" placeholder="%" style="text-align: right;"></label>
+        <label>Final Reload Speed<span id="final_reload_speed"></span></label>
+
+        
+
+        
+
+        <label>Charge Time (if it has one)<input type="number" id="weapon_charge_time"></label> 
+        <label>Effected by Fire Rate Mods <input type="number" placeholder="N/A"></label>
+        <label>Final Charge Rate<span id="final_charge_rate"></span></label>
+
+        
+
+        
+        
+        <label>Status Chance<input type="number" id="weapon_status_chance" placeholder="%" style="text-align: right;"></label>
+        <label>Status Chance Bonus<input type="number" id="status_chance_bonus" placeholder="%" style="text-align: right;"></label>
+        <label>Final Status Chance<span id="final_status_chance"></span></label>
+        
+        
+
+        
+        <label><strong>Damage</strong></label>
+        <label>Continious/Beam Weapon?<input type="checkbox" id="beam_weapon_checkbox" onclick=calculateNums()></label>
+        <label>Multiplicative Gun/CO Bonus?<input type="checkbox" id="Gun/CO_checkbox" onclick=calculateNums()></label>
+
+        <label>Impact:<input type="number" id="impact_damage"></label>
+        <label>Base Damage Bonus<input type="number" id="base_damage_bonus" placeholder="%" style="text-align: right;"></label>
+        <label>Direct Damage Bonus<input type="number" id="direct_damage_bonus" placeholder="%" style="text-align: right;"></label>
+        <label>Puncture:<input type="number" id="puncture_damage"></label>
+        <label>Faction Bonus<input type="number" id="faction_bonus" placeholder="%" style="text-align: right;"></label>
+        
+        
+        <label>Elemental Bonus<input type="number" id="elemental_bonus" placeholder="%" style="text-align: right;"></label>
+        
+        <label>Slash:<input type="number" id="slash_damage"></label>
+
+        <label>Base Elements:<input type="number" id="elemental_damage"></label>
+        <label>Radial/AOE Damage:<input type="number" id="radial_damage"></label>
+          
+    </div>
+
+    
+    <script src="functions.js" defer></script>
+</body>
+</html>
