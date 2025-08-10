@@ -1,5 +1,5 @@
 body {
-    background-color: #a4a4a7;
+    background-color: #466b94;
 }
 
 #calc_containers {
@@ -15,7 +15,7 @@ body {
 #calc_containers input[type="number"] {
     width: 50px; 
     text-align: right;
-    background-color: #ffffff;
+    background-color: #f7f4ea;
 }
 
 #calc_containers input[type="checkbox"] {
