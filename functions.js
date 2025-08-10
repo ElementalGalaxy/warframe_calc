@@ -1,1 +1,139 @@
+function calculateNums() 
+    {   
+        const allInputs = document.querySelectorAll('input[type="number"]');
 
+        const stats = {};
+        allInputs.forEach(input => {
+                stats[input.id] = Number(input.value);
+            });
+
+        const impact_damage = stats.impact_damage;
+        const puncture_damage = stats.puncture_damage;
+        const slash_damage = stats.slash_damage;
+        const aoe_damage = stats.radial_damage;
+        const elemental_damage = stats.elemental_damage;
+
+        let fire_rate = stats.weapon_firerate;
+        let charge_rate = stats.weapon_charge_time;
+        let magazine_size = stats.weapon_magsize;
+        let reload_speed = stats.weapon_reload_speed;
+        let crit_chance = stats.weapon_crit_chance;
+        let crit_damage = stats.weapon_crit_damage;
+        let multishot = stats.weapon_multishot;
+        let status_chance = stats.weapon_status_chance;
+        
+        const base_damage_mods = stats.base_damage_bonus/100;
+        const direct_damage_bonus = stats.direct_damage_bonus/100;
+        const elemental_mods = stats.elemental_bonus/100;
+        const faction_mods = stats.faction_bonus/100;
+        const crit_chance_mods = stats.crit_chance_bonus/100;
+        const crit_damage_mods = stats.crit_damage_bonus/100;
+        const multishot_mods = stats.multishot_bonus/100;
+        const firerate_mods = stats.firerate_bonus/100;
+        const magazine_mods = stats.magsize_bonus/100;
+        const reload_mods = stats.reload_speed_bonus/100;
+        const status_chance_mods = stats.status_chance_bonus/100;
+        const status_damage_mods = stats.status_damage_bonus/100;
+        const viral_effect = stats.viral_bonus/100;
+        const electricity_mods = stats.electricity_bonus/100;
+        const heat_mods = stats.heat_bonus/100;
+        const toxin_mods = stats.toxin_bonus/100;
+        const gas_mods = stats.gas_bonus/100;
+
+        crit_chance = (crit_chance /100) * (1+crit_chance_mods)
+        crit_damage = crit_damage * (1+crit_damage_mods)
+        multishot = multishot * (1+multishot_mods)
+        fire_rate = fire_rate * (1+ firerate_mods)
+        magazine_size = magazine_size * (1+magazine_mods)
+        charge_rate = charge_rate/ (1+firerate_mods)
+        reload_speed = reload_speed / (1+reload_mods)
+        status_chance = (status_chance/100) * (1+ status_chance_mods)
+        
+        let effective_firerate = 1/(charge_rate+(1/fire_rate));
+        let GunCO_checkbox = document.getElementById('Gun/CO_checkbox');
+        let base_total = 0;
+        let modded_base = 0;
+
+        let chance_for_crit = (1+crit_chance*(crit_damage-1));
+
+        if (GunCO_checkbox.checked) {
+            base_total = (((slash_damage + puncture_damage + impact_damage + elemental_damage)*(1+direct_damage_bonus))+aoe_damage) * (1+base_damage_mods) * (1+elemental_mods) * (1+faction_mods) * multishot;
+        }
+        else {
+            base_total = (((slash_damage + puncture_damage + impact_damage + elemental_damage) * (1+base_damage_mods+direct_damage_bonus)) + (aoe_damage * (1+base_damage_mods)))  * (1+elemental_mods) * (1+faction_mods) * multishot;
+        }
+
+        if (GunCO_checkbox.checked) {
+            modded_base = (((slash_damage + puncture_damage + impact_damage)*(1+direct_damage_bonus))) * (1+base_damage_mods) * (1+faction_mods) *chance_for_crit;
+        }
+        else {
+            modded_base = ((slash_damage + puncture_damage + impact_damage) * (1+base_damage_mods+direct_damage_bonus))  *  (1+faction_mods) * chance_for_crit;
+        }
+
+        
+        let average_total = base_total * chance_for_crit;
+        let burst_dps_total = average_total * effective_firerate;
+        
+        let beam_weapon = document.getElementById('beam_weapon_checkbox');
+        if (beam_weapon.checked) {
+            sustained_dps_total = burst_dps_total * ((magazine_size*2)/(effective_firerate*reload_speed+(magazine_size*2)));
+        }
+        else {
+            sustained_dps_total = burst_dps_total * (magazine_size/(effective_firerate*reload_speed+magazine_size));
+        }
+        
+        slash = 0.35*modded_base*(1+status_damage_mods)*(1+faction_mods)*(1+viral_effect);
+        electric = modded_base*(1+status_damage_mods)*(1+faction_mods)*(1+viral_effect)*(1+electricity_mods)*0.5;
+        heat= modded_base*(1+status_damage_mods)*(1+faction_mods)*(1+viral_effect)*(1+heat_mods)*0.5;
+        toxin=modded_base*(1+status_damage_mods)*(1+faction_mods)*(1+viral_effect)*(1+toxin_mods)*0.5;
+        gas=modded_base*(1+status_damage_mods)*(1+faction_mods)*(1+viral_effect)*(1+gas_mods)*0.5;
+        blast=modded_base*(1+status_damage_mods)*(1+faction_mods)*(1+viral_effect)*0.3;
+
+        const slash_dps_span = document.getElementById('Slash_DPS');
+            slash_dps_span.textContent = slash.toFixed(0);
+        const elec_dps_span = document.getElementById('Electric_DPS');
+            elec_dps_span.textContent = electric.toFixed(0);
+        const heat_dps_span = document.getElementById('Heat_DPS');
+            heat_dps_span.textContent = heat.toFixed(0);
+        const toxin_dps_span = document.getElementById('Toxin_DPS');
+            toxin_dps_span.textContent = toxin.toFixed(0);
+        const gas_dps_span = document.getElementById('Gas_DPS');
+            gas_dps_span.textContent = gas.toFixed(0);
+        const blast_dps_span = document.getElementById('Blast_DPS');
+            blast_dps_span.textContent = blast.toFixed(0);
+
+        const final_crit_chance = document.getElementById('final_crit_chance');
+            final_crit_chance.textContent = (crit_chance * 100).toFixed(0) + '%';
+        const final_crit_damage = document.getElementById('final_crit_damage');
+            final_crit_damage.textContent = crit_damage.toFixed(1);
+        const final_multishot = document.getElementById('final_multishot');
+            final_multishot.textContent = multishot.toFixed(1);
+        const final_firerate = document.getElementById('final_firerate');
+            final_firerate.textContent = fire_rate.toFixed(1);
+        const final_magsize = document.getElementById('final_magsize');
+            final_magsize.textContent = magazine_size.toFixed(0)
+        const final_reload_speed = document.getElementById('final_reload_speed');
+            final_reload_speed.textContent = reload_speed.toFixed(1)
+        const final_charge_rate = document.getElementById('final_charge_rate');
+            final_charge_rate.textContent = charge_rate.toFixed(0)
+        const final_status_chance = document.getElementById('final_status_chance');
+            final_status_chance.textContent = (status_chance * 100).toFixed(0) + '%';
+
+
+        const base_Damage_OutputSpan = document.getElementById('base_damage_output');
+            base_Damage_OutputSpan.textContent = base_total.toFixed(0);
+
+        const average_Damage_OutputSpan = document.getElementById('average_damage_output');
+            average_Damage_OutputSpan.textContent = average_total.toFixed(0);
+
+        const burst_dps_output = document.getElementById('burst_output');
+            burst_dps_output.textContent = burst_dps_total.toFixed(0);
+        
+        const sustained_dps_output = document.getElementById('sustained_output');
+            sustained_dps_output.textContent = sustained_dps_total.toFixed(0);
+    }
+
+    const allInputs = document.querySelectorAll('input[type="number"]');
+    allInputs.forEach(input => {
+    input.addEventListener('input', calculateNums);
+    });
