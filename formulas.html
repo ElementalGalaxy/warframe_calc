@@ -1,0 +1,44 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Warframe Damage Calculator</title>
+    <link rel="stylesheet" href='style.css'>
+</head>
+<body>
+    <a href='index.html'>Calculator Page</a>
+    <p>
+    stat= stat*(1+mods)<br>
+    charge rate/reload speed = 1/(1+mods)<br>
+    effective_firerate = 1/(charge_rate+(1/fire_rate))<br>
+    chance_for_crit = (1+crit_chance*(crit_damage-1))<br><br>
+
+    if GunCO is multiplicative<br>
+    base_total = (((slash_damage + puncture_damage + impact_damage + elemental_damage)*(1+direct_damage_bonus))+aoe_damage) * (1+base_damage_mods) * (1+elemental_mods) * (1+faction_mods) * multishot<br>
+    modded_base = (((slash_damage + puncture_damage + impact_damage)*(1+direct_damage_bonus))) * (1+base_damage_mods) * (1+faction_mods) *chance_for_crit<br><br>
+
+    if GunCO is not multiplicative<br>
+    base_total = (((slash_damage + puncture_damage + impact_damage + elemental_damage) * (1+base_damage_mods+direct_damage_bonus)) + (aoe_damage * (1+base_damage_mods)))  * (1+elemental_mods) * (1+faction_mods) * multishot<br>
+    modded_base = ((slash_damage + puncture_damage + impact_damage) * (1+base_damage_mods+direct_damage_bonus))  *  (1+faction_mods) * chance_for_crit<br><br>
+
+    average_total = base_total * chance_for_crit;<br>
+    burst_dps_total = average_total * effective_firerate;<br><br>
+
+    if is beam weapon<br>
+    sustained_dps_total = burst_dps_total * ((magazine_size*2)/(effective_firerate*reload_speed+(magazine_size*2)));<br><br>
+
+    if not beam weapon<br>
+    sustained_dps_total = burst_dps_total * (magazine_size/(effective_firerate*reload_speed+magazine_size));<br><br>
+
+    Status DOTs<br>
+    slash = 0.35*modded_base*(1+status_damage_mods)*(1+faction_mods)*(1+viral_effect);<br>
+    electric = modded_base*(1+status_damage_mods)*(1+faction_mods)*(1+viral_effect)*(1+electricity_mods)*0.5;<br>
+    heat= modded_base*(1+status_damage_mods)*(1+faction_mods)*(1+viral_effect)*(1+heat_mods)*0.5;<br>
+    toxin=modded_base*(1+status_damage_mods)*(1+faction_mods)*(1+viral_effect)*(1+toxin_mods)*0.5;<br>
+    gas=modded_base*(1+status_damage_mods)*(1+faction_mods)*(1+viral_effect)*(1+gas_mods)*0.5;<br>
+    blast=modded_base*(1+status_damage_mods)*(1+faction_mods)*(1+viral_effect)*0.3;
+</p>
+</body>
+</html>
