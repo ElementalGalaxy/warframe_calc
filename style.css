@@ -1,10 +1,10 @@
 body {
-    background-color: #e3dfd3;
+    background-color: #a4a4a7;
 }
 
 #calc_containers {
     display: grid;
-    grid-template-columns: repeat(3, 250px);
+    grid-template-columns: repeat(4, 250px);
     gap: 10px 50px;
 }
 #calc_containers label {
@@ -15,7 +15,7 @@ body {
 #calc_containers input[type="number"] {
     width: 50px; 
     text-align: right;
-    background-color: #e8e8e8;
+    background-color: #ffffff;
 }
 
 #calc_containers input[type="checkbox"] {
