@@ -1,3 +1,23 @@
+document.addEventListener('DOMContentLoaded', function() {
+  // Call your function here
+  event_listeners();
+});
+
+function event_listeners() {
+    const allInputs = document.querySelectorAll('input[type="number"]');
+    allInputs.forEach(input => {
+    input.addEventListener('input', calculateNums);
+    });
+    const saveButton = document.getElementById('save_button');
+    saveButton.addEventListener('click', save_data);
+    const loadButton = document.getElementById('load_button');
+    loadButton.addEventListener('click', load_data);
+    const resetButton = document.getElementById('reset_button');
+    resetButton.addEventListener('click', reset_data);
+    const clearButton = document.getElementById('clear_button');
+    clearButton.addEventListener('click', clear_data);
+}
+
 function calculateNums() 
     {   
         const allInputs = document.querySelectorAll('input[type="number"]');
@@ -131,9 +151,43 @@ function calculateNums()
         
         const sustained_dps_output = document.getElementById('sustained_output');
             sustained_dps_output.textContent = sustained_dps_total.toFixed(0);
-    }
+}
 
+function save_data() {
+    const formData = {};
     const allInputs = document.querySelectorAll('input[type="number"]');
     allInputs.forEach(input => {
-    input.addEventListener('input', calculateNums);
+        // Ensure inputs have an ID, crucial for formData keys
+        if (input.id) { 
+            formData[input.id] = input.value;
+        }
     });
+    localStorage.setItem('myFormState', JSON.stringify(formData));
+}
+
+function load_data() {
+    const allInputs = document.querySelectorAll('input[type="number"]');
+    const savedData = JSON.parse(localStorage.getItem('myFormState'));
+    if (savedData) {
+            allInputs.forEach(input => {
+        if (savedData[input.id] !== undefined) {
+        input.value = savedData[input.id];
+    }
+  });}
+
+}
+
+function reset_data() {
+    localStorage.clear();
+}
+
+function clear_data() {
+    const allInputs = document.querySelectorAll('input[type="number"]');
+
+        allInputs.forEach(input => {
+        // Ensure inputs have an ID, crucial for formData keys
+        if (input.value) { 
+            input.value = "";
+        }
+    });
+}
