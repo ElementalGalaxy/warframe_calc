@@ -8,7 +8,11 @@
 </head>
 <body>
     <h1>Warframe Damage Calculator</h1>
-    <a href='formulas.html'>Formulas Page</a>
+    <a href='formulas.html'>Formulas Page</a><br>
+    <label><button type="button" id="save_button">Save</button></label>
+    <label><button type="button" id="load_button">Load</button></label>
+    <label><button type="button" id="clear_button">Clear Page</button></label>
+    <label><button type="button" id="reset_button">Reset Data</button></label>
     <div id="calc_containers">
         <label><strong> Weapon's Base Stats</strong></label>
         <label><strong>Enter mod bonuses in %</strong></label>
@@ -69,9 +73,6 @@
         <label>Final Charge Rate<span id="final_charge_rate"></span></label>
 
         <label style = "color: #FF2200 ">Heat DPS<span id="Heat_DPS"></span></label>
-        
-        
-
         
         
         <label>Status Chance<input type="number" id="weapon_status_chance" placeholder="%" style="text-align: right;"></label>
