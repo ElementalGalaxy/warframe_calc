@@ -110,17 +110,17 @@ function calculateNums()
         blast=modded_base*(1+status_damage_mods)*(1+faction_mods)*(1+viral_effect)*0.3;
 
         const slash_dps_span = document.getElementById('Slash_DPS');
-            slash_dps_span.textContent = slash.toFixed(0);
+            slash_dps_span.textContent = slash.toFixed(1);
         const elec_dps_span = document.getElementById('Electric_DPS');
-            elec_dps_span.textContent = electric.toFixed(0);
+            elec_dps_span.textContent = electric.toFixed(1);
         const heat_dps_span = document.getElementById('Heat_DPS');
-            heat_dps_span.textContent = heat.toFixed(0);
+            heat_dps_span.textContent = heat.toFixed(1);
         const toxin_dps_span = document.getElementById('Toxin_DPS');
-            toxin_dps_span.textContent = toxin.toFixed(0);
+            toxin_dps_span.textContent = toxin.toFixed(1);
         const gas_dps_span = document.getElementById('Gas_DPS');
-            gas_dps_span.textContent = gas.toFixed(0);
+            gas_dps_span.textContent = gas.toFixed(1);
         const blast_dps_span = document.getElementById('Blast_DPS');
-            blast_dps_span.textContent = blast.toFixed(0);
+            blast_dps_span.textContent = blast.toFixed(1);
 
         const final_crit_chance = document.getElementById('final_crit_chance');
             final_crit_chance.textContent = (crit_chance * 100).toFixed(0) + '%';
@@ -135,22 +135,22 @@ function calculateNums()
         const final_reload_speed = document.getElementById('final_reload_speed');
             final_reload_speed.textContent = reload_speed.toFixed(1)
         const final_charge_rate = document.getElementById('final_charge_rate');
-            final_charge_rate.textContent = charge_rate.toFixed(0)
+            final_charge_rate.textContent = charge_rate.toFixed(1)
         const final_status_chance = document.getElementById('final_status_chance');
             final_status_chance.textContent = (status_chance * 100).toFixed(0) + '%';
 
 
         const base_Damage_OutputSpan = document.getElementById('base_damage_output');
-            base_Damage_OutputSpan.textContent = base_total.toFixed(0);
+            base_Damage_OutputSpan.textContent = base_total.toFixed(1);
 
         const average_Damage_OutputSpan = document.getElementById('average_damage_output');
-            average_Damage_OutputSpan.textContent = average_total.toFixed(0);
+            average_Damage_OutputSpan.textContent = average_total.toFixed(1);
 
         const burst_dps_output = document.getElementById('burst_output');
-            burst_dps_output.textContent = burst_dps_total.toFixed(0);
+            burst_dps_output.textContent = burst_dps_total.toFixed(1);
         
         const sustained_dps_output = document.getElementById('sustained_output');
-            sustained_dps_output.textContent = sustained_dps_total.toFixed(0);
+            sustained_dps_output.textContent = sustained_dps_total.toFixed(1);
 }
 
 function save_data() {
